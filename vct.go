@@ -16,7 +16,7 @@ const (
 )
 
 var (
-	l            = log.New(os.Stderr, "vcv: ", log.Ldate|log.Ltime|log.LUTC|log.Lshortfile)
+	l            = log.New(os.Stderr, "vct: ", log.Ldate|log.Ltime|log.LUTC|log.Lshortfile)
 	please       = []byte("")
 	errTimeout   = errors.New("failed to fetch config in time")
 	errFailedAtt = errors.New("failed to get attestation document")
@@ -107,7 +107,7 @@ func (c *ConfigViewer) verifyHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Get an attestation document if the client provided a nonce.
 	if nonce := r.URL.Query().Get("nonce"); nonce != "" {
-		resp, err := http.Get(fmt.Sprintf("http://127.0.0.1:8443/attestation?nonce=%s", nonce))
+		resp, err := http.Get(fmt.Sprintf("https://nitro.nymity.ch/enclave/attestation?nonce=%s", nonce))
 		if err != nil {
 			http.Error(w, errFailedAtt.Error(), http.StatusInternalServerError)
 			return
