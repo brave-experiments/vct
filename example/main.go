@@ -5,15 +5,15 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/brave-experiments/vcv"
+	"github.com/brave-experiments/vct"
 )
 
 func main() {
-	req, err := http.NewRequest("GET", "https://nymity.ch", nil)
+	req, err := http.NewRequest("GET", "https://nymity.ch/hello-world.html", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	c := vcv.NewConfigViewer(&http.Client{}, req, time.Minute*10)
+	c := vct.NewConfigViewer(&http.Client{}, req, time.Minute*10)
 	c.Serve()
 }
